@@ -54,9 +54,7 @@ export default {
     },
 
     handleSubmit() {
-      console.log("handle submit");
       if (!this.validateForm()) return;
-      console.log("we made it past validation");
 
       this.$emit('update-login', true);
 
