@@ -11,18 +11,11 @@
 export default {
   name: "DynamicNav",
   props: {
-    garageFunction: Function,
-  },
-
-  data: function () {
-    return {
-      loggedIn: false,
-    }
+    loggedIn: Boolean,
   },
 
   methods: {
     click(newLogged) {
-      this.loggedIn = newLogged;
       this.$emit('update-login', newLogged);
     },
   }

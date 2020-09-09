@@ -3,16 +3,14 @@
     <header class="mb-auto">
       <div>
         <h3>SIT120 Project Proposal</h3>
-        <dynamic-nav @update-login="updateLoginEvent"></dynamic-nav>
+        <dynamic-nav v-on:update-login="updateLoginEvent" :logged-in="loggedIn"></dynamic-nav>
       </div>
     </header>
     <main role="main">
       <h1>Check your vehicle!</h1>
       <p class="lead">{{ mastheadDescription }}</p>
       <b-button v-b-modal.modal-1 v-if="!loggedIn">Register</b-button>
-      <b-modal id="modal-1" title="Register">
-        <register v-on:update-login="updateLoginEvent"></register>
-      </b-modal>
+      <register v-on:update-login="updateLoginEvent"></register>
     </main>
     <footer class="mt-auto">
       <div>
@@ -51,7 +49,7 @@ export default {
         this.mastheadDescription = "Your garage:"
       }
     },
-  }
+  },
 }
 </script>
 
