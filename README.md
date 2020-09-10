@@ -1,24 +1,6 @@
-# sit120-assignment3
+# SIT120-Assignment-3
 
-## Project setup
-```
-npm install
-```
+Hey there. This is the repo for my SIT120 assignment 3 project.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+# [Live view](https://huskehhh.github.io/SIT120-Assignment3/)
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
