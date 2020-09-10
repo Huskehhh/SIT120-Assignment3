@@ -10,7 +10,7 @@
             @show-recall-alert="handleShowRecalled"
         ></dynamic-nav>
       </div>
-      <b-alert variant="danger" show v-if="showRecalledVehicle">{{ getStringifiedText(this.searchedVehicle) }} has been
+      <b-alert variant="danger" show v-if="showRecalledVehicle" dismissible>{{ getStringifiedText(this.searchedVehicle) }} has been
         recalled.
         If you own a vehicle like this, please contact your local dealership immediately!
       </b-alert>

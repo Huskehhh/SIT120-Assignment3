@@ -74,14 +74,20 @@ export default {
           this.year.length === 4;
     },
 
-
     handleSubmit() {
       if (!this.validateForm()) return;
 
+      // Replace all spaces with nothing to avoid weird inputs
+      let make = this.replaceAll(this.make, " ", "");
+      let model = this.replaceAll(this.model, " ", "");
+      let year = this.replaceAll(this.year, " ", "");
+
+      console.log(make + " " + model + " " + year);
+
       let car = {
-        year: this.year,
-        make: this.make,
-        model: this.model,
+        year: year,
+        make: make,
+        model: model,
       };
 
       // Hide a tick later
@@ -111,6 +117,7 @@ export default {
       this.year = "";
       this.yearState = null;
     },
+
     isRecalled(car) {
       // Iterate over all recalls and see if provided 'car' meets any of them
       for (let i = 0; i < this.recalls.length; i++) {
@@ -128,9 +135,18 @@ export default {
       return false;
     },
 
+    // Had to write some helper methods cause javascript is dumb and doesnt have these
     equalsIgnoreCase(string1, string2) {
       return string1.toLowerCase() === string2.toLowerCase();
     },
+
+    replaceAll(input, q1, q2) {
+      let result = input;
+      while (result.includes(q1)) {
+        result = input.replace(q1, q2);
+      }
+      return result;
+    }
   }
 }
 </script>
