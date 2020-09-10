@@ -15,6 +15,7 @@ export default {
   },
 
   methods: {
+    // Calls an event for parent component to update prop value
     click(newLogged) {
       this.$emit('update-login', newLogged);
     },

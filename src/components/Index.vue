@@ -2,15 +2,16 @@
   <div class="d-flex h-100 p-3 mx-auto flex-column">
     <header class="mb-auto">
       <div>
-        <h3>SIT120 Project Proposal</h3>
-        <dynamic-nav v-on:update-login="updateLoginEvent" :logged-in="loggedIn"></dynamic-nav>
+        <h3>iRecall</h3>
+        <dynamic-nav @update-login="updateLoginEvent" :logged-in="loggedIn"></dynamic-nav>
       </div>
     </header>
     <main role="main">
-      <h1>Check your vehicle!</h1>
+      <h1>{{ mastheadContent }}</h1>
       <p class="lead">{{ mastheadDescription }}</p>
       <b-button v-b-modal.modal-1 v-if="!loggedIn">Register</b-button>
-      <register v-on:update-login="updateLoginEvent"></register>
+      <register @update-login="updateLoginEvent"></register>
+      <garage v-if="loggedIn" :garage="garage" :recalls="recalls"></garage>
     </main>
     <footer class="mt-auto">
       <div>
@@ -23,11 +24,13 @@
 <script>
 import DynamicNav from "@/components/DynamicNav";
 import Register from "@/components/Register";
+import Garage from "@/components/Garage";
 
 export default {
   name: 'Index',
   props: {},
   components: {
+    Garage,
     DynamicNav,
     Register
   },
@@ -38,15 +41,46 @@ export default {
       mastheadContent: "Check your vehicle!",
       mastheadDescription: "Don't miss important vehicle recall notifications",
       buttonText: "Register now",
+      garage: [
+        {
+          make: "Toyota",
+          model: "Camry",
+          year: "2000",
+        },
+        {
+          make: "Honda",
+          model: "Civic",
+          year: "2002",
+        },
+        {
+          make: "Suzuki",
+          model: "Swift",
+          year: "1998",
+        },
+      ],
+      recalls: [
+        {
+          make: "Suzuki",
+          model: "Swift",
+          year: "1998",
+          recalled: true,
+        },
+      ]
     }
   },
 
   methods: {
+    // This method is called via child components
     updateLoginEvent: function (value) {
       this.loggedIn = value;
       if (this.loggedIn) {
+        // Change the masthead content to be different
         this.mastheadContent = "Welcome back!"
         this.mastheadDescription = "Your garage:"
+      } else {
+        // Default back to the original values
+        this.mastheadContent = "Check your vehicle!";
+        this.mastheadDescription = "Don't miss important vehicle recall notifications";
       }
     },
   },
@@ -54,9 +88,8 @@ export default {
 </script>
 
 <style scoped>
-
 main {
-  padding-top: 20%;
+  padding-top: 10%;
 }
 
 footer {
