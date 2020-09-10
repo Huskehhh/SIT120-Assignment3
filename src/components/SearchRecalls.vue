@@ -82,6 +82,7 @@ export default {
       let model = this.replaceAll(this.model, " ", "");
       let year = this.replaceAll(this.year, " ", "");
 
+      // Build our car object again
       let car = {
         year: year,
         make: make,
@@ -99,23 +100,24 @@ export default {
       }
     },
 
+    // This handles when the user clicks "Ok"
     handleOk(bvModalEvt) {
       // Prevent modal from closing then trigger submission
       bvModalEvt.preventDefault()
       this.handleSubmit()
     },
 
+    // Reset local data when the modal closes
     resetModal() {
       this.make = "";
       this.makeState = null;
-
       this.model = "";
       this.modelState = null;
-
       this.year = "";
       this.yearState = null;
     },
 
+    // Helper method to check if a vehicle is recalled
     isRecalled(car) {
       // Iterate over all recalls and see if provided 'car' meets any of them
       for (let i = 0; i < this.recalls.length; i++) {
@@ -133,11 +135,14 @@ export default {
       return false;
     },
 
-    // Had to write some helper methods cause javascript is dumb and doesnt have these
+    // Helper methods
+
+    // Checks if string1 == string2 ignoring case
     equalsIgnoreCase(string1, string2) {
       return string1.toLowerCase() === string2.toLowerCase();
     },
 
+    // Replaces all occurrences of 'q1' with 'q2' in 'input', and returns resulting string
     replaceAll(input, q1, q2) {
       let result = input;
       while (result.includes(q1)) {

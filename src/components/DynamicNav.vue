@@ -28,10 +28,12 @@ export default {
       this.$emit('update-login', newLogged);
     },
 
+    // Helper method to pass the event call from it's child to parent
     showRecallModal(car) {
       this.$emit("show-recall-alert", car);
     },
 
+    // Helper method to pass the event call from it's child to parent
     handleRegisteredVehicleEvent(car) {
       this.$emit("add-registered-vehicle", car);
     },

@@ -20,7 +20,6 @@
         </b-alert>
       </header>
 
-
       <main role="main">
         <h1>{{ mastheadContent }}</h1>
         <p class="lead">{{ mastheadDescription }}</p>
@@ -28,7 +27,6 @@
         <register @update-login="updateLoginEvent"></register>
         <garage v-if="loggedIn" :garage="garage" :recalls="recalls"></garage>
       </main>
-
 
       <footer class="mt-auto">
         <div>
@@ -104,15 +102,18 @@ export default {
       }
     },
 
+    // Handles the show recalled search event
     handleShowRecalled: function (car) {
       this.showRecalledVehicle = true;
       this.searchedVehicle = car;
     },
 
+    // Method to handle event of registered vehicle addition, simply pushes the argument to the array
     addRegisteredVehicle: function (car) {
       this.garage.push(car);
     },
 
+    // Helper method to turn car object into pretty string
     getStringifiedText(car) {
       return car.year + " " + car.make + " " + car.model;
     },

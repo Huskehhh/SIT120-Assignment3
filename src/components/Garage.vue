@@ -27,23 +27,13 @@ export default {
     garage: Array,
     recalls: Array,
   },
-  data() {
-    return {
-      slide: 0,
-      sliding: null
-    }
-  },
   methods: {
-    onSlideStart() {
-      this.sliding = true
-    },
-    onSlideEnd() {
-      this.sliding = false
-    },
+    // Turns the car object into a pretty string
     getStringifiedText(car) {
       return car.year + " " + car.make + " " + car.model;
     },
 
+    // Helper method to check if a vehicle is recalled
     isRecalled(car) {
       // Iterate over all recalls and see if provided 'car' meets any of them
       for (let i = 0; i < this.recalls.length; i++) {
@@ -61,6 +51,7 @@ export default {
       return false;
     },
 
+    // Checks if string1 = string2 ignoring case
     equalsIgnoreCase(string1, string2) {
       return string1.toLowerCase() === string2.toLowerCase();
     },
@@ -88,6 +79,7 @@ export default {
       for (let i = 0; i < this.garage.length; i++) {
         let car = this.garage[i];
 
+        // Default to success row variant
         let newObj = {
           year: car.year,
           make: car.make,
@@ -95,10 +87,12 @@ export default {
           _rowVariant: "success"
         };
 
+        // If the vehicle however, is recalled, then set as danger row variant (red)
         if (this.isRecalled(car)) {
           newObj._rowVariant = "danger";
         }
 
+        // Push the new car obj to the array
         arr.push(newObj);
       }
 

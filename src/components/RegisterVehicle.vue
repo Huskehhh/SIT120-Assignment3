@@ -63,6 +63,7 @@ export default {
     garage: Array
   },
   methods: {
+    // Further form validation
     validateForm() {
       let numeric = this.year.match(/\d+/g);
 
@@ -74,7 +75,9 @@ export default {
           this.year.length === 4;
     },
 
+    // Method to handle form submission
     handleSubmit() {
+      // If validation fails, return immediately.
       if (!this.validateForm()) return;
 
       // Replace all spaces with nothing to avoid weird inputs
@@ -106,23 +109,24 @@ export default {
       }
     },
 
+    // Method to handle when the user clicks "Ok"
     handleOk(bvModalEvt) {
       // Prevent modal from closing then trigger submission
       bvModalEvt.preventDefault()
       this.handleSubmit()
     },
 
+    // Reset data when modal closes
     resetModal() {
       this.make = "";
       this.makeState = null;
-
       this.model = "";
       this.modelState = null;
-
       this.year = "";
       this.yearState = null;
     },
 
+    // Helper method to check if an inputted car is already registered
     isAlreadyRegistered(car) {
       // Iterate over all recalls and see if provided 'car' meets any of them
       for (let i = 0; i < this.garage.length; i++) {
@@ -140,11 +144,14 @@ export default {
       return false;
     },
 
-    // Had to write some helper methods cause javascript is dumb and doesnt have these
+    // Had to write some helper methods cause javascript is silly and doesn't have these
+
+    // This simply checks if two strings are == ignoring case sensitivity
     equalsIgnoreCase(string1, string2) {
       return string1.toLowerCase() === string2.toLowerCase();
     },
 
+    // This replaces all occurrences of 'q1' with 'q2' in 'input'
     replaceAll(input, q1, q2) {
       let result = input;
       while (result.includes(q1)) {
@@ -153,6 +160,7 @@ export default {
       return result;
     },
 
+    // This capitalises the first letter in the string
     capitaliseFirst(input) {
       return input.charAt(0).toUpperCase() + input.slice(1);
     }
