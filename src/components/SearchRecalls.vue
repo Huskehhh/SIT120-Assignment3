@@ -97,6 +97,8 @@ export default {
       // Check if recalled
       if (this.isRecalled(car)) {
         this.$emit("vehicle-recalled", car);
+      } else {
+        alert("That vehicle has no recall attached to it!");
       }
     },
 
