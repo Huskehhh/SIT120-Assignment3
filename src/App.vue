@@ -28,6 +28,8 @@ export default {
 html, body {
   height: 100%;
   background: linear-gradient(to bottom, rgba(93, 78, 67, 0.9) 0%, rgba(93, 78, 67, 0.9) 100%), url("assets/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 h3, h1, p {

@@ -3,8 +3,17 @@
     <header class="mb-auto">
       <div>
         <h3>iRecall</h3>
-        <dynamic-nav @update-login="updateLoginEvent" :logged-in="loggedIn"></dynamic-nav>
+        <dynamic-nav
+            @update-login="updateLoginEvent"
+            :logged-in="loggedIn"
+            :recalls="recalls"
+            @show-recall-alert="handleShowRecalled"
+        ></dynamic-nav>
       </div>
+      <b-alert variant="danger" show v-if="showRecalledVehicle">{{ getStringifiedText(this.searchedVehicle) }} has been
+        recalled.
+        If you own a vehicle like this, please contact your local dealership immediately!
+      </b-alert>
     </header>
     <main role="main">
       <h1>{{ mastheadContent }}</h1>
@@ -41,6 +50,8 @@ export default {
       mastheadContent: "Check your vehicle!",
       mastheadDescription: "Don't miss important vehicle recall notifications",
       buttonText: "Register now",
+      showRecalledVehicle: false,
+      searchedVehicle: {},
       garage: [
         {
           make: "Toyota",
@@ -83,6 +94,15 @@ export default {
         this.mastheadDescription = "Don't miss important vehicle recall notifications";
       }
     },
+
+    handleShowRecalled: function (car) {
+      this.showRecalledVehicle = true;
+      this.searchedVehicle = car;
+    },
+
+    getStringifiedText(car) {
+      return car.year + " " + car.make + " " + car.model;
+    },
   },
 }
 </script>
@@ -93,6 +113,8 @@ main {
 }
 
 footer {
-  padding-top: 30%;
+  position: fixed;
+  bottom: 0;
+  align-self: center;
 }
 </style>

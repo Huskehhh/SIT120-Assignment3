@@ -3,7 +3,7 @@
     <b-alert
         variant="danger"
         show
-        v-for="veh in recalledVehicles" :key="veh">Your {{ veh }} has been recalled! Contact the manufacturer
+        v-for="veh in recalledVehicles" :key="veh">Your {{ veh }} has been recalled! Contact your local dealership
       immediately!
     </b-alert>
 
@@ -50,15 +50,19 @@ export default {
         let recall = this.recalls[i];
 
         // Compare make, model and year, if all match, return true, if not, continue iteration
-        if (recall.make === car.make &&
-            recall.model === car.model &&
-            recall.year === car.year) {
+        if (this.equalsIgnoreCase(recall.make, car.make) &&
+            this.equalsIgnoreCase(recall.model, car.model) &&
+            this.equalsIgnoreCase(recall.year, car.year)) {
           return true;
         }
       }
 
       // If we make it here, return false
       return false;
+    },
+
+    equalsIgnoreCase(string1, string2) {
+      return string1.toLowerCase() === string2.toLowerCase();
     },
   },
 
