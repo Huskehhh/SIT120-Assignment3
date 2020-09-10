@@ -1,6 +1,5 @@
 <template>
   <nav class="nav nav-masthead justify-content-center">
-    <a class="nav-link btn btn-lg active"><b-button>Home</b-button></a>
     <a class="nav-link btn btn-lg" v-if="!loggedIn" @click="click(true)"><b-button>Login</b-button></a>
     <a class="nav-link btn btn-lg" v-if="loggedIn" @click="click(false)"><b-button>Logout</b-button></a>
     <a class="nav-link btn btn-lg"><b-button v-b-modal.search id="search-recall">Search Recalls</b-button></a>
