@@ -8,6 +8,8 @@
             :logged-in="loggedIn"
             :recalls="recalls"
             @show-recall-alert="handleShowRecalled"
+            :garage="garage"
+            @add-registered-vehicle="addRegisteredVehicle"
         ></dynamic-nav>
       </div>
       <b-alert variant="danger" show v-if="showRecalledVehicle" dismissible>{{ getStringifiedText(this.searchedVehicle) }} has been
@@ -98,6 +100,10 @@ export default {
     handleShowRecalled: function (car) {
       this.showRecalledVehicle = true;
       this.searchedVehicle = car;
+    },
+
+    addRegisteredVehicle: function (car) {
+      this.garage.push(car);
     },
 
     getStringifiedText(car) {

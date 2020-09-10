@@ -1,7 +1,7 @@
 <template>
   <b-modal
-      id="search"
-      title="Search Recalls" @on="resetModal" @hidden="resetModal" @ok="handleOk">
+      id="register-vehicle"
+      title="Register a vehicle!" @on="resetModal" @hidden="resetModal" @ok="handleOk">
     <form ref="form" @submit.stop.prevent="handleSubmit">
 
       <b-form-group
@@ -48,7 +48,7 @@
 
 <script>
 export default {
-  name: "SearchRecalls",
+  name: "RegisterVehicle",
   data() {
     return {
       make: "",
@@ -60,7 +60,7 @@ export default {
     }
   },
   props: {
-    recalls: Array
+    garage: Array
   },
   methods: {
     validateForm() {
@@ -82,6 +82,11 @@ export default {
       let model = this.replaceAll(this.model, " ", "");
       let year = this.replaceAll(this.year, " ", "");
 
+      // Capitalise first letter for cleanliness
+      make = this.capitaliseFirst(make);
+      model = this.capitaliseFirst(model);
+
+      // Build car object again
       let car = {
         year: year,
         make: make,
@@ -90,12 +95,14 @@ export default {
 
       // Hide a tick later
       this.$nextTick(() => {
-        this.$bvModal.hide("search")
+        this.$bvModal.hide("register-vehicle")
       });
 
-      // Check if recalled
-      if (this.isRecalled(car)) {
-        this.$emit("vehicle-recalled", car);
+      // Check if already registered, if not, emit event
+      if (!this.isAlreadyRegistered(car)) {
+        this.$emit("vehicle-registered", car);
+      } else {
+        alert("This vehicle is already registered on your account!");
       }
     },
 
@@ -116,20 +123,20 @@ export default {
       this.yearState = null;
     },
 
-    isRecalled(car) {
+    isAlreadyRegistered(car) {
       // Iterate over all recalls and see if provided 'car' meets any of them
-      for (let i = 0; i < this.recalls.length; i++) {
-        let recall = this.recalls[i];
+      for (let i = 0; i < this.garage.length; i++) {
+        let iterate = this.garage[i];
 
         // Compare make, model and year, if all match, return true, if not, continue iteration
-        if (this.equalsIgnoreCase(recall.make, car.make) &&
-            this.equalsIgnoreCase(recall.model, car.model) &&
-            this.equalsIgnoreCase(recall.year, car.year)) {
+        if (this.equalsIgnoreCase(iterate.make, car.make) &&
+            this.equalsIgnoreCase(iterate.model, car.model) &&
+            this.equalsIgnoreCase(iterate.year, car.year)) {
           return true;
         }
       }
 
-      // If we make it here, return false
+      // If we make it here, no matches were found so return false
       return false;
     },
 
@@ -144,6 +151,10 @@ export default {
         result = input.replace(q1, q2);
       }
       return result;
+    },
+
+    capitaliseFirst(input) {
+      return input.charAt(0).toUpperCase() + input.slice(1);
     }
   }
 }

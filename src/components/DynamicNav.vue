@@ -5,17 +5,21 @@
     <a class="nav-link btn btn-lg" v-if="loggedIn" @click="click(false)"><b-button>Logout</b-button></a>
     <a class="nav-link btn btn-lg"><b-button v-b-modal.search id="search-recall">Search Recalls</b-button></a>
     <search-recalls :recalls="recalls" @vehicle-recalled="showRecallModal"></search-recalls>
+    <a class="nav-link btn btn-lg" v-if="loggedIn"><b-button v-b-modal.register-vehicle id="register-vehicle">Register Vehicle</b-button></a>
+    <register-vehicle :garage="garage" @vehicle-registered="handleRegisteredVehicleEvent"></register-vehicle>
   </nav>
 </template>
 
 <script>
 import SearchRecalls from "@/components/SearchRecalls";
+import RegisterVehicle from "@/components/RegisterVehicle";
 export default {
   name: "DynamicNav",
-  components: {SearchRecalls},
+  components: {RegisterVehicle, SearchRecalls},
   props: {
     loggedIn: Boolean,
     recalls: Array,
+    garage: Array,
   },
 
   methods: {
@@ -26,7 +30,11 @@ export default {
 
     showRecallModal(car) {
       this.$emit("show-recall-alert", car);
-    }
+    },
+
+    handleRegisteredVehicleEvent(car) {
+      this.$emit("add-registered-vehicle", car);
+    },
   }
 }
 </script>
