@@ -1,17 +1,39 @@
 <template>
-  <nav class="nav nav-masthead justify-content-center">
-    <a class="nav-link btn btn-lg" v-if="!loggedIn" @click="click(true)"><b-button>Login</b-button></a>
-    <a class="nav-link btn btn-lg" v-if="loggedIn" @click="click(false)"><b-button>Logout</b-button></a>
-    <a class="nav-link btn btn-lg"><b-button v-b-modal.search id="search-recall">Search Recalls</b-button></a>
-    <search-recalls :recalls="recalls" @vehicle-recalled="showRecallModal"></search-recalls>
-    <a class="nav-link btn btn-lg" v-if="loggedIn"><b-button v-b-modal.register-vehicle id="register-vehicle">Register Vehicle</b-button></a>
-    <register-vehicle :garage="garage" @vehicle-registered="handleRegisteredVehicleEvent"></register-vehicle>
-  </nav>
+  <b-navbar type="dark" variant="dark" fixed="top">
+    <b-navbar-brand href="#">iRecall</b-navbar-brand>
+
+    <b-navbar-nav class="ml-auto">
+      <b-nav-item>
+        <b-button @click="contactUs(true)">Home</b-button>
+      </b-nav-item>
+      <b-nav-item v-if="!loggedIn" @click="click(true)">
+        <b-button>Login</b-button>
+      </b-nav-item>
+      <b-nav-item v-if="loggedIn" @click="click(false)">
+        <b-button>Logout</b-button>
+      </b-nav-item>
+      <b-nav-item>
+        <b-button v-b-modal.search id="search-recall">Search Recalls</b-button>
+      </b-nav-item>
+      <search-recalls
+          :recalls="recalls"
+          @vehicle-recalled="showRecallModal"
+          @simulate-loading="simulateLoading"></search-recalls>
+      <b-nav-item v-if="loggedIn">
+        <b-button v-b-modal.register-vehicle id="register-vehicle">Register Vehicle</b-button>
+      </b-nav-item>
+      <register-vehicle :garage="garage" @vehicle-registered="handleRegisteredVehicleEvent"></register-vehicle>
+      <b-nav-item>
+        <b-button @click="contactUs(false)">Contact us</b-button>
+      </b-nav-item>
+    </b-navbar-nav>
+  </b-navbar>
 </template>
 
 <script>
 import SearchRecalls from "@/components/SearchRecalls";
 import RegisterVehicle from "@/components/RegisterVehicle";
+
 export default {
   name: "DynamicNav",
   components: {RegisterVehicle, SearchRecalls},
@@ -36,12 +58,21 @@ export default {
     handleRegisteredVehicleEvent(car) {
       this.$emit("add-registered-vehicle", car);
     },
+
+    // Emits contact us event
+    contactUs(forceOff) {
+      this.$emit("contact-us", forceOff);
+    },
+
+    simulateLoading(timeout) {
+      this.$emit("simulate-loading", timeout);
+    }
   }
 }
 </script>
 
 <style scoped>
-a, .nav-link, .btn, .btn-lg {
+a {
   align-content: center;
   font-weight: 400;
   color: rgba(255, 255, 255, .7);
@@ -49,7 +80,7 @@ a, .nav-link, .btn, .btn-lg {
   user-select: none;
   background-color: transparent;
   border: 1px solid transparent;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
   font-size: 1.25rem;
   line-height: 1.5;
   border-radius: .3rem;

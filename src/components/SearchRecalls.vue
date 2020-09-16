@@ -94,6 +94,9 @@ export default {
         this.$bvModal.hide("search")
       });
 
+      // Simulate loading for 300ms
+      this.$emit("simulate-loading", 300);
+
       // Check if recalled
       if (this.isRecalled(car)) {
         this.$emit("vehicle-recalled", car);
