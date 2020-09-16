@@ -156,7 +156,7 @@ export default {
 
     // Inverse both
     handleContactUs(forceOff) {
-      this.simulateLoading(100);
+      this.simulateLoading(250);
       if (forceOff) {
         this.showContactUs = false;
         this.showMain = true;
