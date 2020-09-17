@@ -1,14 +1,14 @@
 <template>
   <b-modal
       id="register-vehicle"
-      title="Register a vehicle!" @on="resetModal" @hidden="resetModal" @ok="handleOk">
+      title="Register a vehicle!" @hidden="resetModal" @ok="handleOk" @on="resetModal">
     <form ref="form" @submit.stop.prevent="handleSubmit">
 
       <b-form-group
           :state="yearState"
+          invalid-feedback="Year is required"
           label="Year"
-          label-for="year-input"
-          invalid-feedback="Year is required">
+          label-for="year-input">
         <b-form-input
             id="year-input"
             v-model="year"
@@ -19,9 +19,9 @@
 
       <b-form-group
           :state="makeState"
+          invalid-feedback="Make is required"
           label="Make"
-          label-for="make-input"
-          invalid-feedback="Make is required">
+          label-for="make-input">
         <b-form-input
             id="make-input"
             v-model="make"
@@ -32,9 +32,9 @@
 
       <b-form-group
           :state="modelState"
+          invalid-feedback="Model is required"
           label="Model"
-          label-for="model-input"
-          invalid-feedback="Model is required">
+          label-for="model-input">
         <b-form-input
             id="model-input"
             v-model="model"
@@ -143,8 +143,6 @@ export default {
       // If we make it here, no matches were found so return false
       return false;
     },
-
-    // Had to write some helper methods cause javascript is silly and doesn't have these
 
     // This simply checks if two strings are == ignoring case sensitivity
     equalsIgnoreCase(string1, string2) {

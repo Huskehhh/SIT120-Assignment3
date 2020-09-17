@@ -1,13 +1,13 @@
 <template>
   <b-modal
       id="modal-1"
-      title="Register" @on="resetModal" @hidden="resetModal" @ok="handleOk">
+      title="Register" @hidden="resetModal" @ok="handleOk" @on="resetModal">
     <form ref="form" @submit.stop.prevent="handleSubmit">
       <b-form-group
           :state="emailState"
+          invalid-feedback="Email is required"
           label="Email"
-          label-for="email-input"
-          invalid-feedback="Email is required">
+          label-for="email-input">
         <b-form-input
             id="email-input"
             v-model="email"
@@ -18,9 +18,9 @@
 
       <b-form-group
           :state="passwordState"
+          invalid-feedback="Password is required"
           label="Password"
-          label-for="password-input"
-          invalid-feedback="Password is required">
+          label-for="password-input">
         <b-form-input
             id="password-input"
             v-model="password"

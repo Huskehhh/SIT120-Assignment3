@@ -7,34 +7,39 @@
     </div>
     <div class="d-flex h-100 p-3 mx-auto flex-column">
       <div>
+        <!-- Dynamic navbar component -->
         <dynamic-nav
-            @update-login="updateLoginEvent"
+            :garage="garage"
             :logged-in="loggedIn"
             :recalls="recalls"
+            @update-login="updateLoginEvent"
             @show-recall-alert="handleShowRecalled"
-            :garage="garage"
             @add-registered-vehicle="addRegisteredVehicle"
             @contact-us="handleContactUs"
             @simulate-loading="simulateLoading"
         ></dynamic-nav>
       </div>
+      <!-- Header -->
       <header class="mb-auto">
-        <b-alert variant="danger" show v-if="showRecalledVehicle" dismissible>
+        <!-- Hidden alert waiting for an event update to trigger this to show (upon vehicle search) -->
+        <b-alert v-if="showRecalledVehicle" dismissible show variant="danger">
           {{ getStringifiedText(this.searchedVehicle) }} has been
           recalled.
           If you own a vehicle like this, please contact your local dealership immediately!
         </b-alert>
       </header>
 
-      <main role="main" v-if="showMain">
+      <!-- Main masthead section -->
+      <main v-if="showMain" role="main">
         <h1>{{ mastheadContent }}</h1>
-        <p class="lead" id="mastheadDescription">{{ mastheadDescription }}</p>
-        <b-button v-b-modal.modal-1 v-if="!loggedIn">Register</b-button>
+        <p id="mastheadDescription" class="lead">{{ mastheadDescription }}</p>
+        <b-button v-if="!loggedIn" v-b-modal.modal-1>Register</b-button>
         <register @update-login="updateLoginEvent"></register>
         <garage v-if="loggedIn" :garage="garage" :recalls="recalls"></garage>
       </main>
 
-      <main role="main" v-if="showContactUs" id="contact-us">
+      <!-- Contact us section, hidden until user clicks on contact us -->
+      <main v-if="showContactUs" id="contact-us" role="main">
         <h1>Contact us!</h1>
         <a href="https://github.com/Huskehhh/">
           <font-awesome-icon :icon="['fab', 'github-square']" size="5x"/>
@@ -45,6 +50,7 @@
         </a>
       </main>
 
+      <!-- Footer -->
       <footer class="mt-auto">
         <div>
           <p>newnhamj@deakin.edu.au</p>

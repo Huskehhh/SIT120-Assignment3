@@ -1,5 +1,5 @@
 <template>
-  <b-navbar type="dark" variant="dark" fixed="top">
+  <b-navbar fixed="top" type="dark" variant="dark">
     <b-navbar-brand href="#">iRecall</b-navbar-brand>
 
     <b-navbar-nav class="ml-auto">
@@ -13,14 +13,14 @@
         <b-button>Logout</b-button>
       </b-nav-item>
       <b-nav-item>
-        <b-button v-b-modal.search id="search-recall">Search Recalls</b-button>
+        <b-button id="search-recall" v-b-modal.search>Search Recalls</b-button>
       </b-nav-item>
       <search-recalls
           :recalls="recalls"
           @vehicle-recalled="showRecallModal"
           @simulate-loading="simulateLoading"></search-recalls>
       <b-nav-item v-if="loggedIn">
-        <b-button v-b-modal.register-vehicle id="register-vehicle">Register Vehicle</b-button>
+        <b-button id="register-vehicle" v-b-modal.register-vehicle>Register Vehicle</b-button>
       </b-nav-item>
       <register-vehicle :garage="garage" @vehicle-registered="handleRegisteredVehicleEvent"></register-vehicle>
       <b-nav-item>
@@ -64,6 +64,7 @@ export default {
       this.$emit("contact-us", forceOff);
     },
 
+    // Calls event to parent to simulate loading for 'timeout' milliseconds
     simulateLoading(timeout) {
       this.$emit("simulate-loading", timeout);
     }

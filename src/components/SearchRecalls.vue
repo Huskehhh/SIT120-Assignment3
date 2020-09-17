@@ -1,14 +1,14 @@
 <template>
   <b-modal
       id="search"
-      title="Search Recalls" @on="resetModal" @hidden="resetModal" @ok="handleOk">
+      title="Search Recalls" @hidden="resetModal" @ok="handleOk" @on="resetModal">
     <form ref="form" @submit.stop.prevent="handleSubmit">
 
       <b-form-group
           :state="yearState"
+          invalid-feedback="Year is required"
           label="Year"
-          label-for="year-input"
-          invalid-feedback="Year is required">
+          label-for="year-input">
         <b-form-input
             id="year-input"
             v-model="year"
@@ -19,9 +19,9 @@
 
       <b-form-group
           :state="makeState"
+          invalid-feedback="Make is required"
           label="Make"
-          label-for="make-input"
-          invalid-feedback="Make is required">
+          label-for="make-input">
         <b-form-input
             id="make-input"
             v-model="make"
@@ -32,9 +32,9 @@
 
       <b-form-group
           :state="modelState"
+          invalid-feedback="Model is required"
           label="Model"
-          label-for="model-input"
-          invalid-feedback="Model is required">
+          label-for="model-input">
         <b-form-input
             id="model-input"
             v-model="model"
@@ -94,7 +94,7 @@ export default {
         this.$bvModal.hide("search")
       });
 
-      // Simulate loading for 300ms
+      // Call event to parent to simulate loading for 300ms
       this.$emit("simulate-loading", 300);
 
       // Check if recalled
@@ -139,8 +139,6 @@ export default {
       // If we make it here, return false
       return false;
     },
-
-    // Helper methods
 
     // Checks if string1 == string2 ignoring case
     equalsIgnoreCase(string1, string2) {

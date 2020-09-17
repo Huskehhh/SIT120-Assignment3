@@ -1,16 +1,16 @@
 <template>
   <div>
     <b-alert
-        variant="danger"
-        show
-        v-for="veh in recalledVehicles" :key="veh">Your {{ veh }} has been recalled! Contact your local dealership
+        v-for="veh in recalledVehicles"
+        :key="veh"
+        show variant="danger">Your {{ veh }} has been recalled! Contact your local dealership
       immediately!
     </b-alert>
 
     <b-table
         id="cars"
-        striped hover
-        :items="buildTable">
+        :items="buildTable" hover
+        striped>
     </b-table>
 
     <p>Legend: RED = recalled, GREEN = not recalled</p>
