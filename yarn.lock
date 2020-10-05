@@ -8225,10 +8225,10 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
-vue-cli-plugin-bootstrap-vue@~0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/vue-cli-plugin-bootstrap-vue/-/vue-cli-plugin-bootstrap-vue-0.6.0.tgz#cc500263b2ffd2c3d7ca1c3e5436860b0b20bb74"
-  integrity sha512-sgW3hPlD26AHGJSCoPmEeF1l3KeB/r18nfOAq9RkhIZx5hEwV4jZuiBCxdiyOsha0L5PiegKoofA4gn4c0eLcQ==
+vue-cli-plugin-bootstrap-vue@~0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/vue-cli-plugin-bootstrap-vue/-/vue-cli-plugin-bootstrap-vue-0.7.0.tgz#b44ed7180e59aca2846e981fc67f59d7c77298e3"
+  integrity sha512-KYP7CpwbM6Xw94LR2G6y8ZqqTDKlYTgLDwsxaNUj8NyuAo/mpo2y6Q67T9CXjiPgJYVbWH5IzkhE0gHc+9xZKA==
 
 vue-eslint-parser@^7.0.0:
   version "7.1.0"
